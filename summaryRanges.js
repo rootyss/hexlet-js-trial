@@ -1,18 +1,18 @@
 const summaryRanges = (arrayNumbers) => {
   const sequences = [];
-  if (arrayNumbers.length <= 1) return sequences;
-  let start = arrayNumbers[0];
-  for (let i = 1; i < arrayNumbers.length; i += 1) {
-  	if (arrayNumbers[i] + 1 !== arrayNumbers[i + 1]) {
-  		if (arrayNumbers[i] !== start) {
-  		sequences.push(`${start}->${arrayNumbers[i]}`);
-  		start = arrayNumbers[i + 1];
-  		}
-  	}
+  const len = arrayNumbers.length;
+  let gap = [];
+  if (len <= 1) return sequences;
+
+  for (let i = 0; i < len; i += 1) {
+    if (arrayNumbers[i] + 1 === arrayNumbers[i + 1]) {
+      gap.push(arrayNumbers[i]);
+      if (arrayNumbers[i + 1] + 1 !== arrayNumbers[i + 2]) {
+        gap.push(arrayNumbers[i + 1]);
+        sequences.push(`${gap[0]}->${gap[gap.length - 1]}`);
+        gap = [];
+      }
+    }
   }
   return sequences;
 };
-
-summaryRanges([110, 111, 112, 111, -5, -4, -2, -3, -4, -5]);
-
-// ['110->112', '-5->-4']
