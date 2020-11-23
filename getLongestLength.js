@@ -1,31 +1,16 @@
 const getLongestLength = (str) => {
-  let uniqSymbol = [];
-  let maxLength = 0;
-  for (let i = 0; i < str.length; i += 1) {
-  	for (let k = i; k < str.length; k += 1){
-  	if (uniqSymbol.indexOf(str[k]) === -1) {
-      uniqSymbol.push(str[k]);
-  	  }
-    if (uniqSymbol.indexOf(str[k]) >= 0) {
-    	if(uniqSymbol.length > maxLength) {
-    		maxLength = uniqSymbol.length;
-    		uniqSymbol = [];
-    		uniqSymbol.push(str[k]);
-    	}
-    }
-    
-  	}
-  	}
-  return maxLength;
+  let unique_str = '';
+  let max_length = 0;
+
+  for ( let i = 0; i < str.length; i++ ) {
+    const char = str[i];
+    const char_pos = unique_str.indexOf( char );
+    if ( char_pos >= 0 )
+      unique_str = unique_str.substr( char_pos + 1 );
+
+    unique_str += char;
+    max_length = Math.max( unique_str.length, max_length );
+  }
+
+  return max_length;
 };
-
-
-
-
- console.log(getLongestLength('jabjcdel'), 7) ;
- console.log(getLongestLength('abcddef'), 4);
- console.log(getLongestLength('abbccddeffg'), 3);
- console.log(getLongestLength('abcd'), 4);
- console.log(getLongestLength('1234561qweqwer'), 9);
- console.log(getLongestLength('1234561qweqwerqer'), 9);
- console.log(getLongestLength(''), 0);
