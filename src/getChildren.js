@@ -1,0 +1,1 @@
+const getChildren = (users) => users.map((user) => user.children).flat();
